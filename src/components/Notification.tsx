@@ -1,16 +1,24 @@
 import React, { useEffect } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Toast, useToast } from '@chakra-ui/react';
 
 interface NotificationProps {
   error: string;
 }
 
 const Notification: React.FC<NotificationProps> = ({ error }) => {
+  const toast = useToast();
   useEffect(() => {
-    if (error) toast.warn(error);
+    if (error)
+      toast({
+        title: 'Error',
+        description: error,
+        status: 'error',
+        duration: 3000,
+        position: 'top-right',
+        isClosable: true,
+      });
   }, [error]);
-  return <ToastContainer closeOnClick position='top-right' />;
+  return <></>;
 };
 
 export default Notification;

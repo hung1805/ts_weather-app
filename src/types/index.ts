@@ -21,8 +21,6 @@ export interface WeatherMain {
 export interface WeatherWind {
   speed: number;
   deg: number;
-  gust: number;
-  id: number;
 }
 
 export interface MarkLocation {
@@ -33,7 +31,7 @@ export interface MarkLocation {
 }
 
 export interface WeatherResponse {
-  coord: Coordinates;
+  coords: Coordinates;
   description: WeatherDescription;
   main: WeatherMain;
   wind: WeatherWind;
@@ -42,4 +40,9 @@ export interface WeatherResponse {
   name: string;
   timezone: number;
   visibility: number;
+}
+
+export interface Error {
+  code: number;
+  message: string;
 }
