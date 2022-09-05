@@ -83,7 +83,7 @@ function App() {
           <WeatherCard data={data} icon={icon} />
         </Container>
       ) : (
-        <Flex justifyContent={'center'}>
+        <Flex justifyContent={'center'} maxWidth={'sm'} overflow={'hidden'}>
           <WeatherCardSkeleton />
         </Flex>
       )}

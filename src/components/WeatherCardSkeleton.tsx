@@ -6,7 +6,7 @@ interface Props {}
 const WeatherCardSkeleton: React.FC<Props> = () => {
   return (
     <Box borderRadius={'10px'}>
-      <Flex direction={'column'} maxWidth={'sm'}>
+      <Flex direction={'column'}>
         <SkeletonText noOfLines={1} my={2} />
         <Flex justifyContent={'center'}>
           <SkeletonCircle size={'50px'} />
