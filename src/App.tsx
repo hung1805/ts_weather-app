@@ -83,7 +83,9 @@ function App() {
           <WeatherCard data={data} icon={icon} />
         </Container>
       ) : (
-        <WeatherCardSkeleton />
+        <Flex justifyContent={'center'}>
+          <WeatherCardSkeleton />
+        </Flex>
       )}
       <Flex justifyContent={'center'} mt={12}>
         <Button onClick={onOpen} variant={'outline'} colorScheme={'whatsapp'}>
