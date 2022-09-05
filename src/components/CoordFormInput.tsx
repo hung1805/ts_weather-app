@@ -27,6 +27,7 @@ interface FormInputProps {
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   onClose: () => void;
+  setHeading: Dispatch<SetStateAction<string>>;
 }
 
 const CoordFormInput: React.FC<FormInputProps> = ({
@@ -39,6 +40,7 @@ const CoordFormInput: React.FC<FormInputProps> = ({
   isLoading,
   setIsLoading,
   onClose,
+  setHeading,
 }) => {
   const handleGetWeatherByCoord = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,6 +48,7 @@ const CoordFormInput: React.FC<FormInputProps> = ({
       setIsLoading(true);
       fetchData(lat, long);
       setIsLoading(false);
+      setHeading(`Weather Data at ${long}(long) and ${lat}(lat):`);
       onClose();
     } else setError('Pick up your long and lat');
   };

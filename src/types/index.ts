@@ -35,7 +35,7 @@ export interface WeatherResponse {
   description: WeatherDescription;
   main: WeatherMain;
   wind: WeatherWind;
-  location: MarkLocation;
+  location?: MarkLocation;
   id: number;
   name: string;
   timezone: number;
@@ -45,4 +45,13 @@ export interface WeatherResponse {
 export interface Error {
   code: number;
   message: string;
+}
+export interface Country {
+  id: number;
+  name: string;
+  iso2: string;
+}
+export interface City {
+  id: number;
+  name: string;
 }

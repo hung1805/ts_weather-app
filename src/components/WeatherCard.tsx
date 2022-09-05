@@ -15,9 +15,11 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ data, icon }) => {
         <Heading fontSize={'sm'}>{day.day}</Heading>
         <Heading fontSize={'xl'}>{day.date}</Heading>
         <Image src={icon} alt={icon} fit={'cover'} sizes={'xl'} />
-        <Heading fontSize={'2xl'} mb={2}>
-          {data.name && data.name} {data.location.country && `(${data.location.country})`}
-        </Heading>
+        {data.location && (
+          <Heading fontSize={'2xl'} mb={2}>
+            {data.name && data.name}
+          </Heading>
+        )}
         <Text>{capitalizeString(data.description.description)}</Text>
         <Flex
           direction={'row'}

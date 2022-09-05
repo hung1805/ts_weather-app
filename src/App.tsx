@@ -1,11 +1,12 @@
-import { Box, Container, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, Container, Flex, Heading, useDisclosure } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { iconUrl, weatherInstance } from './api/axios.js';
 import CustomDrawer from './components/CustomDrawer.js';
 import Navbar from './components/Navbar.js';
 import Notification from './components/Notification';
 import WeatherCard from './components/WeatherCard.js';
-import { WeatherResponse } from './types';
+import WeatherCardSkeleton from './components/WeatherCardSkeleton.js';
+import { City, Country, WeatherResponse } from './types';
 
 function App() {
   const [data, setData] = useState<WeatherResponse | undefined>();
@@ -14,6 +15,12 @@ function App() {
   const [error, setError] = useState<string>('');
   const [icon, setIcon] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [countries, setCountries] = useState<Country[] | []>([]);
+  const [country, setCountry] = useState<string>('');
+  const [cities, setCities] = useState<City[] | []>([]);
+  const [city, setCity] = useState<string>('');
+  const [heading, setHeading] = useState<string>('');
+
   const { isOpen, onClose, onOpen, onToggle } = useDisclosure();
 
   const fetchData = async (lat: number, long: number): Promise<void> => {
@@ -68,11 +75,21 @@ function App() {
   return (
     <Box bgColor={'blackAlpha.100'} minH={'100vh'}>
       <Navbar isOpen={isOpen} onToggle={onToggle} />
-      {data && (
+      {data ? (
         <Container>
+          <Heading size={'xl'} colorScheme={'whatsapp'} my={4}>
+            {heading || 'Your Current Weather Data:'}
+          </Heading>
           <WeatherCard data={data} icon={icon} />
         </Container>
+      ) : (
+        <WeatherCardSkeleton />
       )}
+      <Flex justifyContent={'center'} mt={12}>
+        <Button onClick={onOpen} variant={'outline'} colorScheme={'whatsapp'}>
+          Or Pick Up Your City or Coordinate
+        </Button>
+      </Flex>
       <CustomDrawer
         long={long}
         lat={lat}
@@ -85,6 +102,17 @@ function App() {
         isOpen={isOpen}
         onClose={onClose}
         onOpen={onOpen}
+        countries={countries}
+        setCountries={setCountries}
+        country={country}
+        setCountry={setCountry}
+        city={city}
+        cities={cities}
+        setCity={setCity}
+        setCities={setCities}
+        setData={setData}
+        setIcon={setIcon}
+        setHeading={setHeading}
       />
       {error && <Notification error={error} />}
     </Box>
